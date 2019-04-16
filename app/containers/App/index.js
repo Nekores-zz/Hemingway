@@ -10,25 +10,24 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import GlobalStyle from "../../global-styles";
+import {LoginScreen} from "../LoginScreen";
+
+import {Form} from "antd";
 
 const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-  text-align: center;
-  padding-top: 5rem;
+  min-height:100%;
+  min-width:100%;
+
 `;
 
+const LoginForm = Form.create({ name: "normal_login" })(LoginScreen);
 export default function App() {
   return <AppWrapper>
-      <Helmet titleTemplate="%s - React.js Boilerplate" defaultTitle="React.js Boilerplate">
-        <meta name="description" content="A React.js Boilerplate application" />
+      <Helmet titleTemplate="%s - Hemingway" defaultTitle="Hemingway">
+        <meta name="description" content="Hemingway | Web Application" />
       </Helmet>
-      <GlobalStyle />
-      <h1>Codebase is configured!</h1>
-      <p> Thanks</p>
+      <GlobalStyle/>
+      
+      <LoginForm form={{ Username: "admin", Password: "admin" }} />
     </AppWrapper>;
 }
