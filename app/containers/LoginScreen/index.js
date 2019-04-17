@@ -27,6 +27,9 @@ import { Layout, Row, Col, Form } from "antd";
 import Button from "../../components/Elements/Button";
 import Input from "../../components/Elements/Input";
 
+// Router
+import { NavLink } from "react-router-dom";
+
 import { LoginPageWrapper, LoginFormStyle, ErrorAlert } from "./_style";
 
 /* eslint-disable react/prefer-stateless-function */
@@ -34,10 +37,15 @@ export class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      databaseDetails : {
+        Password : "admin",
+        Username : "admin",
+        
+      },
       validation: true,
       validatePassword: null,
       validateUsername: null,
-      loading: false
+      loading: false,
     };
   }
 
@@ -51,17 +59,20 @@ export class LoginScreen extends React.Component {
         validation: false
       });
     } else if (
-      this.state.validatePassword != this.props.form.Password ||
-      this.state.validateUsername != this.props.form.Username
+      this.state.validatePassword != this.state.databaseDetails.Password ||
+      this.state.validateUsername != this.state.databaseDetails.Username
     ) {
       this.setState({ validation: false });
-    } else {
+    } 
+    else {
       this.setState({ validation: true });
+      this.props.history.push("./content");
     }
+    
+   
   };
   render() {
-    return (
-      <LoginPageWrapper>
+    return <LoginPageWrapper>
         <LayoutLogin>
           <Row type="flex" justify="center" align="middle">
             <Col span={6}>
@@ -78,52 +89,37 @@ export class LoginScreen extends React.Component {
                           }
                         ]
                       })(<Input placeholder="Username" />)} */}
-                    <Input
-                      placeholder="Username"
-                      onChange={e =>
-                        this.setState({
-                          validateUsername: e.target.value
-                        })
-                      }
-                    />
+                    <Input placeholder="Username" onChange={e => this.setState(
+                          {
+                            validateUsername: e.target.value
+                          }
+                        )} />
                   </Form.Item>
                   <Form.Item className="passwordInput">
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      onChange={e =>
-                        this.setState({ validatePassword: e.target.value })
-                      }
-                    />
+                    <Input type="password" placeholder="Password" onChange={e => this.setState(
+                          { validatePassword: e.target.value }
+                        )} />
                   </Form.Item>
                   <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="login-form-button"
-                      block
-                    >
+                    {/* <NavLink to="./content" className="navigation-item" activeClassName="navigation-item--active"> */}
+                    <Button type="primary" htmlType="submit" className="login-form-button" block>
                       Sign in
                     </Button>
+                    {/* </NavLink> */}
                   </Form.Item>
                 </Form>
 
-                {this.state.validation != true ? (
-                  <ErrorAlert>
+                {this.state.validation != true ? <ErrorAlert>
                     <p className="_error">Error</p>
                     <p className="_text">
                       Please enter a valid email and password
                     </p>
-                  </ErrorAlert>
-                ) : (
-                  console.log("error")
-                )}
+                  </ErrorAlert> : console.log("error")}
               </LoginFormStyle>
             </Col>
           </Row>
         </LayoutLogin>
-      </LoginPageWrapper>
-    );
+      </LoginPageWrapper>;
   }
 }
 
