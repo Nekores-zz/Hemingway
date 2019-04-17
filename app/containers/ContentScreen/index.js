@@ -18,23 +18,34 @@ import reducer from "./reducer";
 import saga from "./saga";
 
 
+
 import { Layout, Row, Col, Form } from "antd";
-
+import {LayoutStyle} from "./_style"
+import LayoutDefault from "../../components/Layouts/LayoutDefault";
 import Button from "../../components/Elements/Button";
-import Input from "../../components/Elements/Input";
+import Jumborton from "../../components/Jumborton"
 
-import { LoginPageWrapper, LoginFormStyle, ErrorAlert } from "./_style";
+import imgProfile from "../../images/Profiles/1.jpg";
+
+// import { LoginPageWrapper, LoginFormStyle, ErrorAlert } from "./_style";
 /* eslint-disable react/prefer-stateless-function */
 export class ContentScreen extends React.Component {
   render() {
-    return (
-      <div>
+    return <div>
         <Helmet>
           <title>ContentScreen</title>
           <meta name="description" content="Description of ContentScreen" />
         </Helmet>
-      </div>
-    );
+        <LayoutDefault>
+          <LayoutStyle>
+            <Row type="flex" justify="center" align="middle" style={{height:"100%"}}>
+              <Col span={6}>
+                <Jumborton stylePic={{height:"80px", width: "80px", "border-radius":"28px",border: "solid 1px rgba(0, 0, 0, 0.05)", background:`url(${imgProfile})`, "background-size":"cover","background-repeat":"no-repeat"}} alt="Profile Image" mainTitle="Hey Yulia! Let's add some texts today!" primaryButtonName="Let's Go" secondaryButtonName="Texts remaining 15/15" />
+              </Col>
+            </Row>
+          </LayoutStyle>
+        </LayoutDefault>
+      </div>;
   }
 }
 

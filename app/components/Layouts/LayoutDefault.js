@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Layout, Drawer, Button, Row, Col, Affix } from "antd";
+import { Layout, Drawer, Button, Row, Col,Icon, Affix } from "antd";
 // import {LayoutDefaultStyle} from "./_style"
+import NavbarUserModule from "../Elements/NavbarUserModule"
 import styled from "styled-components";
 
 const { Content, Header, Sider, Footer } = Layout;
@@ -8,6 +9,16 @@ const { Content, Header, Sider, Footer } = Layout;
 const HeaderTheme = styled(Header)`
   background-color: #1785fb;
   height: auto;
+  ._barsIcon{
+    color: white;
+    font-size: 25px;
+    position: relative;
+    top: 3px;
+    padding-top: 15px;
+    padding-bottom: 24px;
+    padding-right: 30px;
+    border-right: 1px solid #ffffff40;
+  }
 `;
 export default class LayoutDefault extends Component {
   state = { visible: false, placement: "left" };
@@ -34,15 +45,16 @@ export default class LayoutDefault extends Component {
             <p>Some contents...</p>
           </Drawer>
           <HeaderTheme>
-            <Button type="primary" onClick={this.showDrawer}>
-              Open
-            </Button>
-            <h1> jsdkfdjsk</h1>
-            <h1> jsdkfdjsk</h1>
-            <h1> jsdkfdjsk</h1>
-            <h1> jsdkfdjsk</h1>
+            <Row type="flex" justify="space-between" align="middle">
+              <Col span={2}>
+                <Icon type="menu-fold" onClick={this.showDrawer} className="_barsIcon"/>
+              </Col>
+              <Col span={22}>
+                <NavbarUserModule />
+              </Col>
+            </Row>
           </HeaderTheme>
-          <Content>{this.props.children}</Content>
+          <Content style={{margin: "30px", height: "calc(100vh - 124px)"}}>{this.props.children}</Content>
         </Layout>
       </div>;
   }
