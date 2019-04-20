@@ -8,8 +8,8 @@ import React from "react";
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import {JumbortonStyle} from "./_style";
-import { NavLink } from "react-router-dom";
-import Button from "../Elements/Button/";
+// import { NavLink } from "react-router-dom";
+import {Button, ButtonText} from "../Elements/Button";
 /* eslint-disable react/prefer-stateless-function */
 class Jumborton extends React.Component {
   render() {
@@ -20,11 +20,11 @@ class Jumborton extends React.Component {
       }
         <h2 className="_mainTitle">{this.props.mainTitle}</h2>
         <p className="_para"> {this.props.para}</p>
-        <Button type="primary" className="_btnMain">{this.props.primaryButtonName}</Button>
+        <Button type="primary" onClick={this.props.primarybuttonClick} className="_btnMain">{this.props.primaryButtonName}</Button>
         <br/>
-        <Button type="primary" className="_btnLast">{this.props.secondaryButtonName} </Button>
+        <ButtonText type="primary" className="_btnLast">{this.props.secondaryButtonName} </ButtonText>
       </JumbortonStyle>
-      )
+      );
   }
 }
 

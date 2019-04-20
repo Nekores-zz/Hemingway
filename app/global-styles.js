@@ -22,12 +22,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-family: SofiaPro;
   }
 
   body.fontLoaded {
-    // font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-family: SofiaPro;
   }
 
@@ -36,6 +34,10 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     // background-color: #fafafa;
   } 
+
+  h1,h2,h3,h4,h5,h6,span,i,p,input,textarea{
+     font-family: SofiaPro !important;
+  }
 `;
 
 export default GlobalStyle;

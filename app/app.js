@@ -33,6 +33,9 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+//Global Style
+import GlobalStyle from "./global-styles";
+
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {});
@@ -48,12 +51,15 @@ const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = messages => {
-  ReactDOM.render(<Provider store={store}>
+  ReactDOM.render(
+  <div>
+  <GlobalStyle/>
+    <Provider store={store}>
       <ConnectedRouter history={history}>
-        {/* <App /> */}
         <Routes />
       </ConnectedRouter>
-    </Provider>, MOUNT_NODE);
+    </Provider>
+    </div>, MOUNT_NODE);
 };
 
 if (module.hot) {

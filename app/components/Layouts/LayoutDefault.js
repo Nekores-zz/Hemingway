@@ -1,11 +1,33 @@
 import React, { Component } from "react";
-import { Layout, Drawer, Button, Row, Col,Icon, Affix } from "antd";
+import { Layout, Drawer, Button, Row, Col,Icon, Affix , Menu} from "antd";
 // import {LayoutDefaultStyle} from "./_style"
 import NavbarUserModule from "../Elements/NavbarUserModule"
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const { Content, Header, Sider, Footer } = Layout;
-
+const menu = (
+  <Menu>
+    
+    <Menu.Item>
+        <NavLink
+            to='/content'
+            className="navigation-item"
+            activeClassName="navigation-item--active">
+            {/* <i className="material-icons">people</i> */}
+            <span>Content</span>
+          </NavLink>
+    </Menu.Item>
+    <Menu.Item>
+        <NavLink
+            to='/login'
+            className="navigation-item"
+            activeClassName="navigation-item--active">
+            <span>Logout</span>
+          </NavLink>
+    </Menu.Item>
+  </Menu>
+);
 const HeaderTheme = styled(Header)`
   background-color: #1785fb;
   height: auto;
@@ -40,9 +62,33 @@ export default class LayoutDefault extends Component {
     return <div>
         <Layout>
           <Drawer title="Basic Drawer" placement={this.state.placement} closable={true} onClose={this.onClose} visible={this.state.visible} mask={true} maskClosable={true}>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <p>
+              <NavLink
+            to='/content'
+            className="navigation-item"
+            activeClassName="navigation-item--active">
+            {/* <i className="material-icons">people</i> */}
+            <span>Content</span>
+          </NavLink>
+          </p>
+          <p>
+          <NavLink
+            to='/content/textnote'
+            className="navigation-item"
+            activeClassName="navigation-item--active">
+            {/* <i className="material-icons">people</i> */}
+            <span>Text Note</span>
+          </NavLink>
+          </p>
+          <p>
+          <NavLink
+            to='/login'
+            className="navigation-item"
+            activeClassName="navigation-item--active">
+            {/* <i className="material-icons">people</i> */}
+            <span>Logout</span>
+          </NavLink>
+          </p>
           </Drawer>
           <HeaderTheme>
             <Row type="flex" justify="space-between" align="middle">
@@ -50,7 +96,7 @@ export default class LayoutDefault extends Component {
                 <Icon type="menu-fold" onClick={this.showDrawer} className="_barsIcon"/>
               </Col>
               <Col span={22}>
-                <NavbarUserModule />
+                <NavbarUserModule menu={menu}/>
               </Col>
             </Row>
           </HeaderTheme>

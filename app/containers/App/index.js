@@ -9,7 +9,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import GlobalStyle from "../../global-styles";
+
 import {LoginScreen} from "../LoginScreen";
 
 import {Form} from "antd";
@@ -26,7 +26,7 @@ export default function App() {
       <Helmet titleTemplate="%s - Hemingway" defaultTitle="Hemingway">
         <meta name="description" content="Hemingway | Web Application" />
       </Helmet>
-      <GlobalStyle/>
+      
       
       <LoginForm form={{ Username: "admin", Password: "admin" }} />
     </AppWrapper>;
