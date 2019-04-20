@@ -13,18 +13,19 @@ import {
 } from "react-router-dom";
 
 
-import LoginScreen from "../../containers/LoginScreen";
-import ContentScreen from "../../containers/ContentScreen";
+import LoginScreen from "../../containers/LoginScreen/";
+import ContentScreen from "../../containers/ContentScreen/";
+import TextNote from "../../containers/ContentScreen/TextNote/";
 
 
 class Routes extends React.Component {
   render() {
     return <Router>
         <Switch>
-          {/* <Route exact path="/" component={authenticated(Dashboard)} /> */}
-          <Route exact path="/login" component={LoginScreen} />
-          <Route exact path="/content" component={ContentScreen} />
-          {/* <Redirect to="/login" /> */}
+          <Route exact path="/" component={LoginScreen} />
+          <Route path="/login" component={LoginScreen} />
+          <Route path="/content/textnote" component={TextNote} />
+          <Route path="/content" component={ContentScreen} />
           <Route render={() => <h1>404 Error</h1>} />
         </Switch>
       </Router>;

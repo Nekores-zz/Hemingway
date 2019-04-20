@@ -17,20 +17,28 @@ import makeSelectContentScreen from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 
-
-
 import { Layout, Row, Col, Form } from "antd";
-import {LayoutStyle} from "./_style"
+import { LayoutStyle } from "./_style";
 import LayoutDefault from "../../components/Layouts/LayoutDefault";
 import Button from "../../components/Elements/Button";
-import Jumborton from "../../components/Jumborton"
+import Jumborton from "../../components/Jumborton";
 
 import imgProfile from "../../images/Profiles/1.jpg";
 
 // import { LoginPageWrapper, LoginFormStyle, ErrorAlert } from "./_style";
 /* eslint-disable react/prefer-stateless-function */
 export class ContentScreen extends React.Component {
-  render() {
+  constructor(props){
+    super(props);
+    this.state = {
+      value: ""
+    }
+    this.Golink = this.Golink.bind(this);
+  }
+  Golink(){
+    this.props.history.push("./content/textnote");
+  }
+  render () {
     return <div>
         <Helmet>
           <title>ContentScreen</title>
@@ -38,9 +46,21 @@ export class ContentScreen extends React.Component {
         </Helmet>
         <LayoutDefault>
           <LayoutStyle>
-            <Row type="flex" justify="center" align="middle" style={{height:"100%"}}>
-              <Col span={6}>
-                <Jumborton stylePic={{height:"80px", width: "80px", "border-radius":"28px",border: "solid 1px rgba(0, 0, 0, 0.05)", background:`url(${imgProfile})`, "background-size":"cover","background-repeat":"no-repeat"}} alt="Profile Image" mainTitle="Hey Yulia! Let's add some texts today!" primaryButtonName="Let's Go" secondaryButtonName="Texts remaining 15/15" />
+            <Row type="flex" justify="center" align="middle" style={{ height: "100%" }} className="animated zoomIn slow-2s delay-0s">
+              <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl = {{span: 9}} xxl={{span:7}}>
+                <Jumborton 
+                stylePic={{ 
+                    height: "80px", 
+                    width: "80px", "borderRadius": "28px", 
+                    border: "solid 1px rgba(0, 0, 0, 0.05)", 
+                    background: `url(${imgProfile})`, 
+                    "backgroundSize": "cover", 
+                    "backgroundRepeat": "no-repeat"
+                  }} 
+                alt="Profile Image"
+                 mainTitle="Hey Yulia! Let's add some texts today!" primaryButtonName="Let's Go"
+                 primarybuttonClick={this.Golink}
+                 secondaryButtonName="Texts remaining 15/15" ></Jumborton>
               </Col>
             </Row>
           </LayoutStyle>

@@ -7,17 +7,10 @@
 import React from "react";
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-import { Badge, Icon, Avatar, Menu, Dropdown } from "antd";
+import { Badge, Icon, Avatar,Dropdown } from "antd";
 import {NavbarUserModuleStyle} from "./_style";
 
 
-const menu = (
-  <Menu>
-    <Menu.Item>test</Menu.Item>
-    <Menu.Item>test</Menu.Item>
-    <Menu.Item>test</Menu.Item>
-  </Menu>
-);
 /* eslint-disable react/prefer-stateless-function */
 class NavbarUserModule extends React.Component {
   render() {
@@ -29,7 +22,7 @@ class NavbarUserModule extends React.Component {
         </li>
         <li>
           <Avatar icon="user" className="_avatar" />
-          <Dropdown overlay={menu} placement="bottomRight">
+          <Dropdown overlay={this.props.menu} placement="bottomRight">
             <a className="ant-dropdown-link" href="#">
               yulia@mail.ru <Icon type="down" />
             </a>

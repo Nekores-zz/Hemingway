@@ -24,7 +24,7 @@ import LayoutLogin from "../../components/Layouts/LayoutLogin";
 // form
 import { Layout, Row, Col, Form } from "antd";
 
-import Button from "../../components/Elements/Button";
+import {Button} from "../../components/Elements/Button";
 import Input from "../../components/Elements/Input";
 
 // Router
@@ -74,21 +74,13 @@ export class LoginScreen extends React.Component {
   render() {
     return <LoginPageWrapper>
         <LayoutLogin>
-          <Row type="flex" justify="center" align="middle">
-            <Col span={6}>
+          <Row type="flex" justify="center" align="middle" >
+            <Col xs={{ span: 20 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 12 }} xl={{span: 8}} xxl={{span:6}} className={this.state.validation ? 'animated zoomIn slow-2s delay-0s': "animated headShake slow-0s delay-0s"}>
               <LoginFormStyle>
                 <img className="_LoginFormLogo" src={LoginFormLogo} alt="" />
                 <h2 className="_Title_H2"> Welcome to Project!</h2>
                 <Form onSubmit={this.handleSubmit} className="login-form">
                   <Form.Item className="usernameInput">
-                    {/* {getFieldDecorator("userName", {
-                        rules: [
-                          {
-                            required: true,
-                            message: "Please input your username!"
-                          }
-                        ]
-                      })(<Input placeholder="Username" />)} */}
                     <Input placeholder="Username" onChange={e => this.setState(
                           {
                             validateUsername: e.target.value
@@ -101,11 +93,9 @@ export class LoginScreen extends React.Component {
                         )} />
                   </Form.Item>
                   <Form.Item>
-                    {/* <NavLink to="./content" className="navigation-item" activeClassName="navigation-item--active"> */}
                     <Button type="primary" htmlType="submit" className="login-form-button" block>
                       Sign in
                     </Button>
-                    {/* </NavLink> */}
                   </Form.Item>
                 </Form>
 
