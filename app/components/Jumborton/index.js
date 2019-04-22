@@ -22,7 +22,7 @@ class Jumborton extends React.Component {
         <p className="_para"> {this.props.para}</p>
         <Button type="primary" onClick={this.props.primarybuttonClick} className="_btnMain">{this.props.primaryButtonName}</Button>
         <br/>
-        <ButtonText type="primary" className="_btnLast">{this.props.secondaryButtonName} </ButtonText>
+        <ButtonText onClick={this.props.secondarybuttonClick} type="primary" className="_btnLast">{this.props.secondaryButtonName} </ButtonText>
       </JumbortonStyle>
       );
   }

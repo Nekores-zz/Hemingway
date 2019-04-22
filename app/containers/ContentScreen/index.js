@@ -36,7 +36,7 @@ export class ContentScreen extends React.Component {
     this.Golink = this.Golink.bind(this);
   }
   Golink(){
-    this.props.history.push("./content/textnote");
+    this.props.history.push("content/textnote");
   }
   render () {
     return <div>

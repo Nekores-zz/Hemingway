@@ -5,8 +5,6 @@
  */
 
 import React from "react";
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 import { Badge, Icon, Avatar,Dropdown } from "antd";
 import {NavbarUserModuleStyle} from "./_style";
 
