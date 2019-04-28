@@ -24,7 +24,7 @@ import LayoutLogin from "../../components/Layouts/LayoutLogin";
 // form
 import { Layout, Row, Col, Form } from "antd";
 
-import {Button} from "../../components/Elements/Button";
+import { Button } from "../../components/Elements/Button";
 import Input from "../../components/Elements/Input";
 
 // Router
@@ -37,15 +37,14 @@ export class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      databaseDetails : {
-        Password : "admin",
-        Username : "admin",
-        
+      databaseDetails: {
+        Username: "admin",
+        Password: "admin"
       },
       validation: true,
       validatePassword: null,
       validateUsername: null,
-      loading: false,
+      loading: false
     };
   }
 
@@ -58,58 +57,110 @@ export class LoginScreen extends React.Component {
       this.setState({
         validation: false
       });
-    } else if (
-      this.state.validatePassword != this.state.databaseDetails.Password ||
-      this.state.validateUsername != this.state.databaseDetails.Username
+    }
+    // else if (
+    //   this.state.validatePassword != this.state.databaseDetails.Password ||
+    //   this.state.validateUsername != this.state.databaseDetails.Username
+    // ) {
+    //   this.setState({ validation: false });
+    // }
+    else if (
+      this.state.validatePassword == "content" &&
+      this.state.validatePassword == "content"
     ) {
-      this.setState({ validation: false });
-    } 
-    else {
       this.setState({ validation: true });
       this.props.history.push("./content");
+    } else if (
+      this.state.validatePassword == "editor" &&
+      this.state.validatePassword == "editor"
+    ) {
+      this.setState({ validation: true });
+      this.props.history.push("./editor");
+    } else if (
+      this.state.validatePassword == "proofreader" &&
+      this.state.validatePassword == "proofreader"
+    ) {
+      this.setState({ validation: true });
+      this.props.history.push("./proofreader");
+    } else if (
+      this.state.validatePassword == "supervisor" &&
+      this.state.validatePassword == "supervisor"
+    ) {
+      this.setState({ validation: true });
+      this.props.history.push("./supervisor");
+    } else {
+      this.setState({ validation: false });
     }
-    
-   
   };
   render() {
-    return <LoginPageWrapper>
+    return (
+      <LoginPageWrapper>
         <LayoutLogin>
-          <Row type="flex" justify="center" align="middle" >
-            <Col xs={{ span: 20 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 12 }} xl={{span: 8}} xxl={{span:6}} className={this.state.validation ? 'animated zoomIn slow-2s delay-0s': "animated headShake slow-0s delay-0s"}>
+          <Row type="flex" justify="center" align="middle">
+            <Col
+              xs={{ span: 20 }}
+              sm={{ span: 18 }}
+              md={{ span: 14 }}
+              lg={{ span: 12 }}
+              xl={{ span: 8 }}
+              xxl={{ span: 6 }}
+              className={
+                this.state.validation
+                  ? "animated zoomIn slow-2s delay-0s"
+                  : "animated headShake slow-0s delay-0s"
+              }
+            >
               <LoginFormStyle>
                 <img className="_LoginFormLogo" src={LoginFormLogo} alt="" />
                 <h2 className="_Title_H2"> Welcome to Project!</h2>
                 <Form onSubmit={this.handleSubmit} className="login-form">
                   <Form.Item className="usernameInput">
-                    <Input placeholder="Username" onChange={e => this.setState(
-                          {
-                            validateUsername: e.target.value
-                          }
-                        )} />
+                    <Input
+                      placeholder="Username"
+                      onChange={e =>
+                        this.setState({
+                          validateUsername: e.target.value
+                        })
+                      }
+                    />
                   </Form.Item>
                   <Form.Item className="passwordInput">
-                    <Input type="password" placeholder="Password" onChange={e => this.setState(
-                          { validatePassword: e.target.value }
-                        )} />
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      onChange={e =>
+                        this.setState({ validatePassword: e.target.value })
+                      }
+                    />
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button" block>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="login-form-button"
+                      block
+                    >
                       Sign in
                     </Button>
                   </Form.Item>
                 </Form>
 
-                {this.state.validation != true ? <ErrorAlert>
+                {this.state.validation != true ? (
+                  <ErrorAlert>
                     <p className="_error">Error</p>
                     <p className="_text">
                       Please enter a valid email and password
                     </p>
-                  </ErrorAlert> : console.log("error")}
+                  </ErrorAlert>
+                ) : (
+                  console.log("error")
+                )}
               </LoginFormStyle>
             </Col>
           </Row>
         </LayoutLogin>
-      </LoginPageWrapper>;
+      </LoginPageWrapper>
+    );
   }
 }
 

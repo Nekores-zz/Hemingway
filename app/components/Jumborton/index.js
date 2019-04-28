@@ -20,7 +20,11 @@ class Jumborton extends React.Component {
       }
         <h2 className="_mainTitle">{this.props.mainTitle}</h2>
         <p className="_para"> {this.props.para}</p>
-        <Button type="primary" onClick={this.props.primarybuttonClick} className="_btnMain">{this.props.primaryButtonName}</Button>
+        {
+          this.props.primarybuttonClick &&(
+            <Button type="primary" onClick={this.props.primarybuttonClick} className="_btnMain">{this.props.primaryButtonName}</Button>
+          )
+        }
         <br/>
         <ButtonText onClick={this.props.secondarybuttonClick} type="primary" className="_btnLast">{this.props.secondaryButtonName} </ButtonText>
       </JumbortonStyle>

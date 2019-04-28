@@ -13,10 +13,24 @@ import {
 } from "react-router-dom";
 
 
-import LoginScreen from "../../containers/LoginScreen/";
-import ContentScreen from "../../containers/ContentScreen/";
-import TextNote from "../../containers/ContentScreen/TextNote/";
-import SuccessScreen from "../../containers/ContentScreen/SuccessScreen/";
+
+import LoginScreen from "../LoginScreen/";
+import ContentScreen from "../ContentScreen/";
+import ContentScreenTextNote from "../ContentScreen/TextNote/";
+import ContentScreenSuccessScreen from "../ContentScreen/SuccessScreen/";
+import ContentScreenRoundScreen from "../ContentScreen/RoundScreen/";
+
+import EditorScreen from "../EditorScreen/";
+import EditorScreenTextNote from "../EditorScreen/TextNote/";
+import EditorScreenSuccessScreen from "../EditorScreen/SuccessScreen/";
+import EditorScreenRoundScreen from "../EditorScreen/RoundScreen/";
+
+import ProofReaderScreen from "../ProofReaderScreen";
+import ProofReaderScreenTextNote from "../ProofReaderScreen/TextNote/";
+import ProofReaderScreenSuccessScreen from "../ProofReaderScreen/SuccessScreen/";
+import ProofReaderScreenRoundScreen from "../ProofReaderScreen/RoundScreen/";
+
+import SuperVisorScreen from "../SupervisorScreen/";
 
 
 class Routes extends React.Component {
@@ -25,9 +39,24 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path="/" component={LoginScreen} />
           <Route path="/login" component={LoginScreen} />
-          <Route path="/content/textnote/success" component={SuccessScreen} />
-          <Route path="/content/textnote" component={TextNote} />
-          <Route path="/content" component={ContentScreen} />
+
+          <Route path="/content/textnote/note" component={ContentScreenRoundScreen} />
+          <Route path="/content/textnote/success" component={ContentScreenSuccessScreen} />
+          <Route path="/content/textnote" component={ContentScreenTextNote} />
+          <Route path="/content/" component={ContentScreen} />
+
+          <Route path="/editor/textnote/note" component={EditorScreenRoundScreen} />
+          <Route path="/editor/textnote/success" component={EditorScreenSuccessScreen} />
+          <Route path="/editor/textnote" component={EditorScreenTextNote} />
+          <Route path="/editor" component={EditorScreen} />
+
+          <Route path="/proofreader/textnote/note" component={ProofReaderScreenRoundScreen} />
+          <Route path="/proofreader/textnote/success" component={ProofReaderScreenSuccessScreen} />
+          <Route path="/proofreader/textnote" component={ProofReaderScreenTextNote} />
+          <Route path="/proofreader" component={ProofReaderScreen} />
+
+          <Route path="/supervisor" component={SuperVisorScreen} />
+
           <Route render={() => <h1>404 Error</h1>} />
         </Switch>
       </Router>;

@@ -35,7 +35,7 @@ export class SuccessScreen extends React.Component {
     this.GolinkSecondaryBtn = this.GolinkSecondaryBtn.bind(this);
   }
          GolinkPrimaryBtn(){
-           this.props.history.push("/content");
+           this.props.history.push("/content/textnote/note");
          }
          GolinkSecondaryBtn(){
            this.props.history.push("/content/textnote");

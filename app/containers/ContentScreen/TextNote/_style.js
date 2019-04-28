@@ -9,7 +9,16 @@ export const TextNoteStyle = styled.div`
     textarea{
         padding-top: 10px;
     }
-    input,textarea{
+    .maint{
+        width: 400px;
+    height: 250px;
+    border: solid 1px black;
+    display: inline-block;
+    }
+    .maintt{
+
+    }
+    input,textarea, .DraftEditor-root{
         border-radius: 4px;
         height: 44px;
         background-color: #f9f9fb;
@@ -33,5 +42,34 @@ export const TextNoteStyle = styled.div`
             box-shadow:none;
             border-color: #8dabc4;
         }
+    }
+    .ant-mention-wrapper{
+        margin-bottom: 20px;
+    }
+    .ant-mention-wrapper .public-DraftEditorPlaceholder-root .public-DraftEditorPlaceholder-inner{
+        color:#8dabc4;
+    }
+    .notranslate.public-DraftEditor-content > div > div > div > span > span{
+        // color:#1785fb;
+    }
+
+    }
+    .ant-mention-editor, .DraftEditor-root{
+        margin-bottom:0;
+         background-color: #f9f9fb !important;
+        border-color: #f9f9fb;
+        &:hover{
+            box-shadow:none;
+            border-color: #8dabc4;
+        }
+        &:focus{
+            box-shadow:none;
+            border-color: #8dabc4;
+            outline: none;
+        }
+    }
+    .ant-mention-wrapper.ant-mention-active:not(.disabled) .ant-mention-editor{
+        border-color: #8dabc4;
+        box-shadow: none;
     }
 `;

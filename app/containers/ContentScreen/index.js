@@ -23,49 +23,67 @@ import LayoutDefault from "../../components/Layouts/LayoutDefault";
 import Button from "../../components/Elements/Button";
 import Jumborton from "../../components/Jumborton";
 
-import imgProfile from "../../images/Profiles/1.jpg";
+import imgProfile from "../../images/Profiles/yulia.png";
 
 // import { LoginPageWrapper, LoginFormStyle, ErrorAlert } from "./_style";
 /* eslint-disable react/prefer-stateless-function */
 export class ContentScreen extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       value: ""
-    }
+    };
     this.Golink = this.Golink.bind(this);
   }
-  Golink(){
+  Golink() {
     this.props.history.push("content/textnote");
   }
-  render () {
-    return <div>
+  render() {
+    return (
+      <div>
         <Helmet>
-          <title>ContentScreen</title>
+          <title>Content Screen</title>
           <meta name="description" content="Description of ContentScreen" />
         </Helmet>
         <LayoutDefault>
           <LayoutStyle>
-            <Row type="flex" justify="center" align="middle" style={{ height: "100%" }} className="animated zoomIn slow-2s delay-0s">
-              <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl = {{span: 9}} xxl={{span:7}}>
-                <Jumborton 
-                stylePic={{ 
-                    height: "80px", 
-                    width: "80px", "borderRadius": "28px", 
-                    border: "solid 1px rgba(0, 0, 0, 0.05)", 
-                    background: `url(${imgProfile})`, 
-                    "backgroundSize": "cover", 
-                    "backgroundRepeat": "no-repeat"
-                  }} 
-                alt="Profile Image"
-                 mainTitle="Hey Yulia! Let's add some texts today!" primaryButtonName="Let's Go"
-                 primarybuttonClick={this.Golink}
-                 secondaryButtonName="Texts remaining 15/15" ></Jumborton>
+            <Row
+              type="flex"
+              justify="center"
+              align="middle"
+              style={{ height: "100%" }}
+              className="animated zoomIn slow-2s delay-0s"
+            >
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 18 }}
+                md={{ span: 14 }}
+                lg={{ span: 8 }}
+                xl={{ span: 9 }}
+                xxl={{ span: 7 }}
+              >
+                <Jumborton
+                  stylePic={{
+                    height: "80px",
+                    width: "80px",
+                    borderRadius: "28px",
+                    border: "solid 1px rgba(0, 0, 0, 0.05)",
+                    background: `url(${imgProfile})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat"
+                  }}
+                  alt="Profile Image"
+                  mainTitle="Hey Yulia! Let's add some texts today!"
+                  primaryButtonName="Let's Go"
+                  primarybuttonClick={this.Golink}
+                  secondaryButtonName="Texts remaining 15/15"
+                />
               </Col>
             </Row>
           </LayoutStyle>
         </LayoutDefault>
-      </div>;
+      </div>
+    );
   }
 }
 

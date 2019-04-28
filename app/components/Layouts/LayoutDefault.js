@@ -29,19 +29,29 @@ const menu = (
 );
 
 export default class LayoutDefault extends Component {
-  state = { visible: false, placement: "left" };
+
+  constructor(props) {
+    super(props);
+
+    this.state = { visible: this.props.collapseAble?true:false,
+       placement: "left" };
+    this.showDrawer = this.showDrawer.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+  
 
   showDrawer = () => {
     this.setState({ visible: true });
-  };
+  }
 
   onClose = () => {
     this.setState({ visible: false });
-  };
+  }
 
   onChange = e => {
     this.setState({ placement: e.target.value });
-  };
+  }
 
   
   render() {

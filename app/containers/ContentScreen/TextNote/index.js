@@ -16,61 +16,113 @@ import injectReducer from "utils/injectReducer";
 import makeSelectTextNote from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import {Row,Col,Icon, notification} from "antd";
+import { Row, Col, Icon, notification, Popover, List, Mention } from "antd";
 import LayoutDefault from "../../../components/Layouts/layoutDefault";
 import Input from "./../../../components/Elements/Input/";
-import {Button, ButtonText} from "./../../../components/Elements/Button/"
-import {TextNoteStyle} from "./_style";
+import { Button, ButtonText } from "./../../../components/Elements/Button/";
+import { TextNoteStyle } from "./_style";
+
+const { toContentState } = Mention;
 
 /* eslint-disable react/prefer-stateless-function */
 
 notification.config({
-  placement: 'topRight',
+  placement: "topRight",
   top: 85,
-  duration: 3,
+  duration: 3
 });
+
+function onSelect(suggestion) {
+  console.log("onSelect", toContentState(suggestion));
+}
+
+const users = ["afc163", "benjycui", "yiminghe", "jljsj33", "dqaria", "RaoHai"];
+const tags = ["1.0", "2.0", "3.0"];
 export class TextNote extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
+      listItems: [
+        "Racing car sprays burning fuel into crowd.",
+        "Japanese princess to wed commoner.",
+        "Australian walks 100km after outback crash.",
+        "Man charged over missing wedding girl.",
+        "Los Angeles battles huge wildfires."
+      ],
+      text: "",
+
+      suggestions: [],
+      visible: false,
+      selectedText: [],
       inputValue1: "",
-      inputValue2: "",
-      randomText : {
-          title:"https://www.opentable.com/r/sushi-ginza-onodera-new-york? …",
-          para:"Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account."
+      inputValue2: toContentState(""),
+      randomText: {
+        title: "https://www.opentable.com/r/sushi-ginza-onodera-new-york? …",
+        para:
+          "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account."
       }
-    }
+    };
     this.randomTextGenerate = this.randomTextGenerate.bind(this);
     this.onFromSend = this.onFromSend.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  randomTextGenerate(){
-    const {title, para} = this.state.randomText;
+  randomTextGenerate() {
+    const { title, para } = this.state.randomText;
     this.setState({
       inputValue1: title,
-      inputValue2: para,
+      inputValue2: toContentState(para)
     });
-     notification["success"]({
-    message: 'Random Text Generated',
-    description: 'Random text is successfully added.',
-  });
-     
-    // alert(2);
+    notification["success"]({
+      message: "Random Text Generated",
+      description: "Random text is successfully added."
+    });
   }
-  onFromSend(){
-  
-  if(this.state.inputValue1 != "" && this.state.inputValue2 != ""){
-    this.props.history.push("textnote/success");
-    // notification["success"]({
-    //   message: "Submitted Successfully",
-    //   description: "Your text has been sent to further approval process"
-    // });
-  }else{
+  onFromSend() {
+    if (this.state.inputValue1 != "" && this.state.inputValue2 != "") {
+      this.props.history.push("/content/textnote/success");
+      // notification["success"]({
+      //   message: "Submitted Successfully",
+      //   description: "Your text has been sent to further approval process"
+      // });
+    } else {
       notification["error"]({
-      message: "Oops!",
-      description: 'You cant submit empty values, You must have to generate text to submit.',
-  });
+        message: "Oops!",
+        description: [
+          "You cant submit empty values, You must have to generate text to submit."
+        ]
+      });
+    }
   }
+  componentDidMount() {
+    // this.mention.focus();
   }
+
+  handleChange = editorState => {
+    this.setState({
+      inputValue2: editorState
+    });
+  };
+  getSelectedText = e => {
+    alert(1);
+    if (windown.getSelection().toString().length) {
+      let text = window.getSelection().toString();
+      // console.log(text)
+      this.setState({
+        text,
+        visible: true
+      });
+    }
+  };
+  handleVisibleChange = visible => {
+    this.setState({ visible });
+  };
+  onSearchChange = (value, trigger) => {
+    console.log("onSearchChange", value, trigger);
+    const dataSource = trigger === "@" ? users : tags;
+    this.setState({
+      suggestions: dataSource.filter(item => item.indexOf(value) !== -1)
+    });
+  };
   render() {
     return (
       <div>
@@ -78,19 +130,96 @@ export class TextNote extends React.Component {
           <title>TextNote</title>
           <meta name="description" content="Description of TextNote" />
         </Helmet>
-       <LayoutDefault>
-         <TextNoteStyle>
-          <Row type="flex" justify="center" align="middle" style={{ height: "100%" }} >
-              <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl = {{span: 9}} xxl={{span:7}}>
-                <Input value={this.state.inputValue1} placeholder="Source link" className="animated zoomIn slow-2s delay-0s" onChange={(e)=> this.setState({
-                  inputValue1: e.target.value
-                })}/>
-                <Input.TextArea value={this.state.inputValue2} autosize={{ minRows: 6, maxRows: 6 }} style={{resize: "none"}} placeholder="Add some text and tags … " className="animated zoomIn slow-2s delay-0s" onChange={(e)=> this.setState({
-                  inputValue2: e.target.value
-                })}/>
-                <Button type="primary" className="animated zoomIn slow-2s delay-0s" onClick={this.onFromSend}> Submit  </Button>
-                <ButtonText type="primary" icon="thunderbolt" isright="right" className="animated zoomIn slow-2s delay-0s" onClick={this.randomTextGenerate}> Get random text  </ButtonText>
-            </Col>
+        <LayoutDefault>
+          <TextNoteStyle>
+            <Row
+              type="flex"
+              justify="center"
+              align="middle"
+              style={{ height: "100%" }}
+            >
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 18 }}
+                md={{ span: 14 }}
+                lg={{ span: 8 }}
+                xl={{ span: 9 }}
+                xxl={{ span: 7 }}
+              >
+                <Input
+                  value={this.state.inputValue1}
+                  placeholder="Source link"
+                  className="animated zoomIn slow-2s delay-0s"
+                  onChange={e =>
+                    this.setState({
+                      inputValue1: e.target.value
+                    })
+                  }
+                />
+                {/* <Input.TextArea
+                  value={this.state.inputValue2}
+                  autosize={{ minRows: 6, maxRows: 6 }}
+                  style={{ resize: "none" }}
+                  placeholder="Add some text and tags … "
+                  className="animated zoomIn slow-2s delay-0s"
+                  onMouseUp={this.getSelectedText}
+                  onChange={e => {
+                    this.setState({
+                      inputValue2: e.target.value
+                    });
+                  }}
+                /> */}
+                <Popover
+                  placement="bottom"
+                  content={
+                    <List
+                      header={<div>Header</div>}
+                      footer={<div>Footer</div>}
+                      bordered
+                      dataSource={this.state.listItems}
+                      renderItem={item => (
+                        <List.Item>{this.state.listItems}</List.Item>
+                      )}
+                    />
+                  }
+                  title={this.state.text}
+                  trigger="click"
+                  visible={this.state.visible}
+                  onVisibleChange={this.handleVisibleChange}
+                >
+                  {/* <Button type="primary">Click me</Button> */}
+                </Popover>
+                <Mention
+                  className="animated zoomIn slow-2s delay-0s"
+                  ref={ele => (this.mention = ele)}
+                  multiLines={true}
+                  loading={true}
+                  style={{ width: "100%", height: 150 }}
+                  onChange={this.handleChange}
+                  placeholder="input @ to mention people, # to mention tag"
+                  prefix={["@", "#"]}
+                  onSearchChange={this.onSearchChange}
+                  suggestions={this.state.suggestions}
+                  onSelect={onSelect}
+                  value={this.state.inputValue2}
+                />
+                <Button
+                  type="primary"
+                  className="animated zoomIn slow-2s delay-0s"
+                  onClick={this.onFromSend}
+                >
+                  Submit
+                </Button>
+                <ButtonText
+                  type="primary"
+                  icon="thunderbolt"
+                  isright="right"
+                  className="animated zoomIn slow-2s delay-0s"
+                  onClick={this.randomTextGenerate}
+                >
+                  Get random text
+                </ButtonText>
+              </Col>
             </Row>
           </TextNoteStyle>
         </LayoutDefault>

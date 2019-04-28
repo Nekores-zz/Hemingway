@@ -71,6 +71,45 @@ export const ButtonText = styled(Button)`
     box-shadow:none;
     color: ${props => props.colorText || "#292f36"};
   }
+
 `;
 
+
+
+export const IconButton = styled(AntButton)`
+  background-color: ${props => props.bg || "#f9f9fb"};
+  border-color: ${props => props.bg || "#f9f9fb"};
+  height: 44px;
+  font-size: 17px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: ${props => props.bg ? "white ": "#252c32"};
+  box-shadow:none;
+  margin-left: 20px;
+  padding-left:10px !important;
+  padding-right:10px !important;
+  &:focus {
+    box-shadow:none;
+    background-color: ${props => props.bg || "#f9f9fb"};
+    border-color: ${props => props.bg || "#f9f9fb"};
+    color: ${props => props.bg ? "white ": "#252c32"};
+
+  }
+  &:hover {
+    box-shadow:none;
+    background-color: ${props => props.bg || "#f9f9fb"};
+    border-color: ${props => props.bg || "#f9f9fb"};
+    color: ${props => props.bg ? "white ": "#252c32"};
+  }
+  &:active {
+    box-shadow:none;
+    background-color: ${props => props.bg || "#f9f9fb"};
+    border-color: ${props => props.bg || "#f9f9fb"};
+    color: ${props => props.bg ? "white ": "#252c32"};
+  }
+`;
 
