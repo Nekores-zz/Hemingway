@@ -16,13 +16,14 @@ import injectReducer from "utils/injectReducer";
 import makeSelectEditorScreen from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { Layout, Row, Col, Form } from "antd";
+import { Layout, Row, Col, Form, Menu } from "antd";
 import { LayoutStyle } from "./_style";
 import LayoutDefault from "../../components/Layouts/LayoutDefault";
 import Button from "../../components/Elements/Button";
 import Jumborton from "../../components/Jumborton";
-
+import { NavLink } from "react-router-dom";
 import imgProfile from "../../images/Profiles/alex.png";
+import Comments from "./Comments/"
 
 // import { LoginPageWrapper, LoginFormStyle, ErrorAlert } from "./_style";
 /* eslint-disable react/prefer-stateless-function */
@@ -30,7 +31,34 @@ export class EditorScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      comments: (
+        <div>
+
+        </div>
+      ),
+      menu: (
+        <Menu>
+          <Menu.Item>
+            <NavLink
+              to="/editor"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/login"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Logout</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
+      ),
     };
     this.Golink = this.Golink.bind(this);
   }
@@ -38,13 +66,14 @@ export class EditorScreen extends React.Component {
     this.props.history.push("/editor/textnote");
   }
   render() {
+    const {menu} = this.state;
     return (
       <div>
         <Helmet>
-          <title>EditorScreen</title>
-          <meta name="description" content="Description of EditorScreen" />
+          <title>Editor Screen</title>
+          <meta name="description" content="Description of Editor Screen" />
         </Helmet>
-        <LayoutDefault>
+        <LayoutDefault isCommentSidebar={true} commentSideBarContent={this.state.comments} menu={menu} comments={<Comments/>}>
           <LayoutStyle>
             <Row
               type="flex"

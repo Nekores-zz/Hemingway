@@ -1,68 +1,55 @@
 import React, { Component } from "react";
-import { Layout, Drawer, Button, Row, Col,Icon, Affix , Menu} from "antd";
-import { LayoutDefaultStyle, HeaderTheme, DrawerStyle } from "./_style";
-import NavbarUserModule from "../Elements/NavbarUserModule"
+import { Layout, Drawer, Button, Row, Col, Icon, Affix, Menu } from "antd";
+import {
+  LayoutDefaultStyle,
+  HeaderTheme,
+  SiderStyle,
+  CommentSiderStyle
+} from "./_style";
+import NavbarUserModule from "../Elements/NavbarUserModule";
 import { NavLink } from "react-router-dom";
 
-const { Content, Header, Sider, Footer } = Layout;
-const menu = (
-  <Menu>
-    
-    <Menu.Item>
-        <NavLink
-            to='/content'
-            className="navigation-item"
-            activeClassName="navigation-item--active">
-            {/* <i className="material-icons">people</i> */}
-            <span>Dashboard</span>
-          </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-        <NavLink
-            to='/login'
-            className="navigation-item"
-            activeClassName="navigation-item--active">
-            <span>Logout</span>
-          </NavLink>
-    </Menu.Item>
-  </Menu>
-);
+import CrossImg from "../../images/Icons/cross@3x.png";
+import LogoPic from "../../images/Icons/pino@3x.png";
+
+const { Content } = Layout;
 
 export default class LayoutDefault extends Component {
-
   constructor(props) {
     super(props);
 
-    this.state = { visible: this.props.collapseAble?true:false,
-       placement: "left" };
-    this.showDrawer = this.showDrawer.bind(this);
-    this.onClose = this.onClose.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-  
-
-  showDrawer = () => {
-    this.setState({ visible: true });
+    this.state = {
+      visible: this.props.collapseAble ? true : false,
+      showCommentbox: false,
+      menu: this.props.menu,
+      
+    };
+    this.showSider = this.showSider.bind(this);
   }
 
-  onClose = () => {
-    this.setState({ visible: false });
-  }
+  showSider = () => {
+    this.setState({ visible: !this.state.visible });
+  };
 
-  onChange = e => {
-    this.setState({ placement: e.target.value });
-  }
-
-  
+  closeCommentbox = () => {
+    this.setState({
+      showCommentbox: !this.state.showCommentbox
+    });
+  };
+  isNotifications = () => {
+    if (this.state.showCommentbox == false) {
+      this.setState({ showCommentbox: true });
+    }
+  };
   render() {
+    const { menu } = this.state;
     return <div>
         <LayoutDefaultStyle>
-          <DrawerStyle title="Main Menu " placement={this.state.placement} closable={true} onClose={this.onClose} visible={this.state.visible} mask={true} maskClosable={true}>
+          <SiderStyle isshowsider={this.state.visible.toString()}>
             <h4 className="_headings"> GENERAL</h4>
             <ul>
               <li>
                 <NavLink to="/content" className="navigation-item" activeClassName="navigation-item--active">
-                  {/* <i className="material-icons">people</i> */}
                   <span>Dashboard</span>
                 </NavLink>
               </li>
@@ -129,22 +116,33 @@ export default class LayoutDefault extends Component {
                 </NavLink>
               </li>
             </ul>
-          </DrawerStyle>
-          <HeaderTheme>
-            <Row type="flex" justify="space-between" align="middle">
-              <Col span={2}>
-                <Icon type="menu-fold" onClick={this.showDrawer} className="_barsIcon" />
-              </Col>
-              <Col span={22}>
-                <NavbarUserModule menu={menu} />
-              </Col>
-            </Row>
-          </HeaderTheme>
-          <Content
-            style={{ margin: "30px", height: "calc(100vh - 124px)" }}
-          >
-            {this.props.children}
-          </Content>
+          </SiderStyle>
+          <Layout>
+            <HeaderTheme>
+              <Row type="flex" justify="space-between" align="middle">
+                <Col span={2}>
+                  {this.props.sidebarToggle ? <Icon type="menu-fold" onClick={this.showSider} className="_barsIcon" /> : <div className="_brand">
+                      <img src={LogoPic} alt="logo" />
+                    </div>}
+                </Col>
+                <Col span={22}>
+                  <NavbarUserModule menu={menu} notifications={this.isNotifications} nobell={this.props.nobell} />
+                </Col>
+              </Row>
+            </HeaderTheme>
+            <Layout>
+              <Content style={{ margin: "30px", height: "calc(100vh - 124px)" }}>
+                {this.props.children}
+              </Content>
+              <CommentSiderStyle iscommentbox={this.state.showCommentbox.toString()}>
+                <h3 className="_title">
+                  Comments
+                  <img onClick={this.closeCommentbox} src={CrossImg} height="30px" className="_crossBtn" />
+                </h3>
+                {this.props.comments}
+              </CommentSiderStyle>
+            </Layout>
+          </Layout>
         </LayoutDefaultStyle>
       </div>;
   }

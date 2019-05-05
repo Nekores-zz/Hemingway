@@ -1,6 +1,5 @@
 /**
  * app.js
- *
  * This is the entry file for the application, only setup and boilerplate
  * code.
  */
@@ -10,7 +9,7 @@ import '@babel/polyfill';
 import "antd/dist/antd.css";
 
 // View
-import Routes from './containers/Navigation/Routes'
+import Routes from './containers/Navigation/Routers'
 
 // Import all the third party stuff
 import React from 'react';

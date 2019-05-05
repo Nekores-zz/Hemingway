@@ -5,36 +5,18 @@ import NavbarUserModule from "../Elements/NavbarUserModule"
 import { NavLink } from "react-router-dom";
 
 const { Content, Header, Sider, Footer } = Layout;
-const menu = (
-  <Menu>
-    
-    <Menu.Item>
-        <NavLink
-            to='/content'
-            className="navigation-item"
-            activeClassName="navigation-item--active">
-            {/* <i className="material-icons">people</i> */}
-            <span>Dashboard</span>
-          </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-        <NavLink
-            to='/login'
-            className="navigation-item"
-            activeClassName="navigation-item--active">
-            <span>Logout</span>
-          </NavLink>
-    </Menu.Item>
-  </Menu>
-);
+// const menu = 
 
 export default class LayoutAdmin extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = { visible: this.props.collapseAble?true:false,
-       placement: "left" };
+    this.state = { 
+      visible: this.props.collapseAble?true:false,
+      placement: "left",
+      menu: this.props.menu,
+      };
     this.showDrawer = this.showDrawer.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -55,6 +37,7 @@ export default class LayoutAdmin extends Component {
 
   
   render() {
+    // const {..res} = this.state;
     return <div>
         <LayoutDefaultStyle>
           <DrawerStyle title="Main Menu " placement={this.state.placement} closable={true} onClose={this.onClose} visible={this.state.visible} mask={true} maskClosable={true}>
@@ -62,7 +45,6 @@ export default class LayoutAdmin extends Component {
             <ul>
               <li>
                 <NavLink to="/content" className="navigation-item" activeClassName="navigation-item--active">
-                  {/* <i className="material-icons">people</i> */}
                   <span>Dashboard</span>
                 </NavLink>
               </li>
@@ -136,7 +118,7 @@ export default class LayoutAdmin extends Component {
                 <Icon type="menu-fold" onClick={this.showDrawer} className="_barsIcon" />
               </Col>
               <Col span={22}>
-                <NavbarUserModule menu={menu} />
+                <NavbarUserModule menu={this.state.menu} />
               </Col>
             </Row>
           </HeaderTheme>

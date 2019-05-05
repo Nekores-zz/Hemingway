@@ -17,11 +17,13 @@ import makeSelectContentScreen from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 
-import { Layout, Row, Col, Form } from "antd";
+import { Layout, Row, Col, Form, Menu } from "antd";
+import { NavLink } from "react-router-dom";
 import { LayoutStyle } from "./_style";
 import LayoutDefault from "../../components/Layouts/LayoutDefault";
 import Button from "../../components/Elements/Button";
 import Jumborton from "../../components/Jumborton";
+import Comments from "./Comments/";
 
 import imgProfile from "../../images/Profiles/yulia.png";
 
@@ -31,21 +33,44 @@ export class ContentScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      menu: (
+        <Menu>
+          <Menu.Item>
+            <NavLink
+              to="/content"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/login"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Logout</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
+      ),
     };
     this.Golink = this.Golink.bind(this);
   }
   Golink() {
-    this.props.history.push("content/textnote");
+    this.props.history.push("/content/textnote");
   }
   render() {
+    const { menu } = this.state;
     return (
       <div>
         <Helmet>
           <title>Content Screen</title>
           <meta name="description" content="Description of ContentScreen" />
         </Helmet>
-        <LayoutDefault>
+        <LayoutDefault menu={menu} comments={<Comments/>} >
           <LayoutStyle>
             <Row
               type="flex"

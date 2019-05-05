@@ -16,11 +16,14 @@ import injectReducer from "utils/injectReducer";
 import makeSelectTextNote from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { Row, Col, Icon, notification, Popover, List, Mention } from "antd";
+import { Row, Col, Icon, notification, Popover, List, Mention, Menu } from "antd";
+import {NavLink} from "react-router-dom";
 import LayoutDefault from "../../../components/Layouts/layoutDefault";
 import Input from "./../../../components/Elements/Input/";
 import { Button, ButtonText } from "./../../../components/Elements/Button/";
+import Comments from "./../Comments/";
 import { TextNoteStyle } from "./_style";
+
 
 const { toContentState } = Mention;
 
@@ -50,7 +53,28 @@ export class TextNote extends React.Component {
         "Los Angeles battles huge wildfires."
       ],
       text: "",
-
+      menu: (
+        <Menu>
+          <Menu.Item>
+            <NavLink
+              to="/content"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/login"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Logout</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
+      ),
       suggestions: [],
       visible: false,
       selectedText: [],
@@ -124,38 +148,21 @@ export class TextNote extends React.Component {
     });
   };
   render() {
-    return (
-      <div>
+    const {menu} = this.state;
+    return <div>
         <Helmet>
           <title>TextNote</title>
           <meta name="description" content="Description of TextNote" />
         </Helmet>
-        <LayoutDefault>
+        <LayoutDefault menu={menu} comments={<Comments/>}>
           <TextNoteStyle>
-            <Row
-              type="flex"
-              justify="center"
-              align="middle"
-              style={{ height: "100%" }}
-            >
-              <Col
-                xs={{ span: 24 }}
-                sm={{ span: 18 }}
-                md={{ span: 14 }}
-                lg={{ span: 8 }}
-                xl={{ span: 9 }}
-                xxl={{ span: 7 }}
-              >
-                <Input
-                  value={this.state.inputValue1}
-                  placeholder="Source link"
-                  className="animated zoomIn slow-2s delay-0s"
-                  onChange={e =>
-                    this.setState({
-                      inputValue1: e.target.value
-                    })
-                  }
-                />
+            <Row type="flex" justify="center" align="middle" style={{ height: "100%" }}>
+              <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl={{ span: 9 }} xxl={{ span: 7 }}>
+                <Input value={this.state.inputValue1} placeholder="Source link" className="animated zoomIn slow-2s delay-0s" onChange={e => this.setState(
+                      {
+                        inputValue1: e.target.value
+                      }
+                    )} />
                 {/* <Input.TextArea
                   value={this.state.inputValue2}
                   autosize={{ minRows: 6, maxRows: 6 }}
@@ -169,62 +176,28 @@ export class TextNote extends React.Component {
                     });
                   }}
                 /> */}
-                <Popover
-                  placement="bottom"
-                  content={
-                    <List
-                      header={<div>Header</div>}
-                      footer={<div>Footer</div>}
-                      bordered
-                      dataSource={this.state.listItems}
-                      renderItem={item => (
-                        <List.Item>{this.state.listItems}</List.Item>
-                      )}
-                    />
-                  }
-                  title={this.state.text}
-                  trigger="click"
-                  visible={this.state.visible}
-                  onVisibleChange={this.handleVisibleChange}
-                >
+                <Popover placement="bottom" content={<List header={<div>
+                          Header
+                        </div>} footer={<div>
+                          Footer
+                        </div>} bordered dataSource={this.state.listItems} renderItem={item => <List.Item
+                        >
+                          {this.state.listItems}
+                        </List.Item>} />} title={this.state.text} trigger="click" visible={this.state.visible} onVisibleChange={this.handleVisibleChange}>
                   {/* <Button type="primary">Click me</Button> */}
                 </Popover>
-                <Mention
-                  className="animated zoomIn slow-2s delay-0s"
-                  ref={ele => (this.mention = ele)}
-                  multiLines={true}
-                  loading={true}
-                  style={{ width: "100%", height: 150 }}
-                  onChange={this.handleChange}
-                  placeholder="input @ to mention people, # to mention tag"
-                  prefix={["@", "#"]}
-                  onSearchChange={this.onSearchChange}
-                  suggestions={this.state.suggestions}
-                  onSelect={onSelect}
-                  value={this.state.inputValue2}
-                />
-                <Button
-                  type="primary"
-                  className="animated zoomIn slow-2s delay-0s"
-                  onClick={this.onFromSend}
-                >
+                <Mention className="animated zoomIn slow-2s delay-0s" ref={ele => (this.mention = ele)} multiLines={true} loading={true} style={{ width: "100%", height: 150 }} onChange={this.handleChange} placeholder="input @ to mention people, # to mention tag" prefix={["@", "#"]} onSearchChange={this.onSearchChange} suggestions={this.state.suggestions} onSelect={onSelect} value={this.state.inputValue2} />
+                <Button type="primary" className="animated zoomIn slow-2s delay-0s" onClick={this.onFromSend}>
                   Submit
                 </Button>
-                <ButtonText
-                  type="primary"
-                  icon="thunderbolt"
-                  isright="right"
-                  className="animated zoomIn slow-2s delay-0s"
-                  onClick={this.randomTextGenerate}
-                >
+                <ButtonText type="primary" icon="thunderbolt" isright="right" className="animated zoomIn slow-2s delay-0s" onClick={this.randomTextGenerate}>
                   Get random text
                 </ButtonText>
               </Col>
             </Row>
           </TextNoteStyle>
         </LayoutDefault>
-      </div>
-    );
+      </div>;
   }
 }
 

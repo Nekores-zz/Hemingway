@@ -16,10 +16,12 @@ import injectReducer from "utils/injectReducer";
 import makeSelectTextNote from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { Row, Col, Icon, notification, Popover, List, Mention } from "antd";
+import { Row, Col, Icon, notification, Popover, List, Mention, Menu } from "antd";
+import {NavLink} from "react-router-dom";
 import LayoutDefault from "../../../components/Layouts/layoutDefault";
 import Input from "./../../../components/Elements/Input/";
 import { Button, ButtonText } from "./../../../components/Elements/Button/";
+import Comments from "../Comments/"
 import { TextNoteStyle } from "./_style";
 
 const { toContentState } = Mention;
@@ -50,7 +52,28 @@ export class TextNote extends React.Component {
         "Los Angeles battles huge wildfires."
       ],
       text: "",
-
+      menu: (
+        <Menu>
+          <Menu.Item>
+            <NavLink
+              to="/proofreader"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/login"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Logout</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
+      ),
       suggestions: [],
       visible: false,
       selectedText: [],
@@ -102,13 +125,14 @@ export class TextNote extends React.Component {
     });
   };
   render() {
+    const {menu} = this.state;
     return (
       <div>
         <Helmet>
           <title>TextNote</title>
           <meta name="description" content="Description of TextNote" />
         </Helmet>
-        <LayoutDefault>
+        <LayoutDefault menu={menu} comments={<Comments/>}>
           <TextNoteStyle>
             <Row
               type="flex"

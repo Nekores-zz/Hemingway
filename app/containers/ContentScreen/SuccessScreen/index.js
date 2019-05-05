@@ -16,11 +16,13 @@ import injectReducer from "utils/injectReducer";
 import makeSelectSuccessScreen from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { Layout, Row, Col, Form } from "antd";
+import { Layout, Row, Col, Form, Menu } from "antd";
+import {NavLink} from "react-router-dom";
 import { LayoutStyle } from "./_style";
 import LayoutDefault from "../../../components/Layouts/LayoutDefault";
 import Button from "../../../components/Elements/Button";
 import Jumborton from "../../../components/Jumborton/"
+import Comments from "./../Comments/"
 
 import imgProfile from "../../../images/Icons/SuccessImg.png";
 
@@ -29,7 +31,28 @@ export class SuccessScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-
+      menu: (
+        <Menu>
+          <Menu.Item>
+            <NavLink
+              to="/content"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/login"
+              className="navigation-item"
+              activeClassName="navigation-item--active"
+            >
+              <span>Logout</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
+      ),
     }
     this.GolinkPrimaryBtn = this.GolinkPrimaryBtn.bind(this);
     this.GolinkSecondaryBtn = this.GolinkSecondaryBtn.bind(this);
@@ -41,12 +64,13 @@ export class SuccessScreen extends React.Component {
            this.props.history.push("/content/textnote");
          }
          render() {
+           const {menu} = this.state;
            return <div>
                <Helmet>
                  <title>Success Screen</title>
                  <meta name="description" content="Description of Success Screen" />
                </Helmet>
-               <LayoutDefault>
+               <LayoutDefault menu={menu} comments={<Comments/>}>
                  <LayoutStyle>
                    <Row type="flex" justify="center" align="middle" style={{ height: "100%" }} className="animated zoomIn slow-2s delay-0s">
                      <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl={{ span: 9 }} xxl={{ span: 7 }}>
