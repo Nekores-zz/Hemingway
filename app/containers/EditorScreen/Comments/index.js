@@ -22,10 +22,10 @@ class Comments extends React.Component {
         </div>
         <ul>
           <li>
-            <Comment background="#f9f9fb" commentSide commentText={this.state.comment.text} />
+            <Comment background="#f9f9fb" commentSide textNote commentText={this.state.comment.text} />
           </li>
           <li>
-            <Comment background="#f9f9fb" commentSide commentText={this.state.comment.text} />
+            <Comment background="#f9f9fb" commentSide textNote commentText={this.state.comment.text} />
           </li>
         </ul>
       </div>;

@@ -2,7 +2,8 @@ import Login from '../LoginScreen/Loadable';
 import contentRoutes from '../ContentScreen/routes';
 import editorRoutes from '../EditorScreen/routes';
 import proofEditorRoutes from "../ProofReaderScreen/routes";
-import supervisorRoutes from "../supervisorScreen/routes";
+import supervisorRoutes from "../SupervisorScreen/routes";
+import faqs from "../Faqs";
 
 export default [
   // Login Screen
@@ -16,6 +17,11 @@ export default [
     path: "/login",
     exact: true
   },
+  {
+    component: faqs,
+    path: "/faqs",
+    exact: true
+  },
 
   // Content Screen
   ...contentRoutes,
@@ -27,5 +33,5 @@ export default [
   ...proofEditorRoutes,
 
   // SuperVisor Screen
-  ...supervisorRoutes
+  ...supervisorRoutes,
 ];

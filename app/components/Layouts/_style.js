@@ -9,10 +9,14 @@ export const LayoutLoginStyle = styled.div`
 // export default LayoutDefaultStyle;
 
 
-export const LayoutDefaultStyle = styled(Layout)`
-// background:red;
 
-`;
+export const LayoutDefaultStyle = styled(Layout)`
+         // background:red;
+         height: 100%;
+         .ant-layout.ant-layout-has-sider > .ant-layout,
+         .ant-layout.ant-layout-has-sider > .ant-layout-content {
+           overflow-x: scroll;
+         }`;
 export const SiderStyle = styled(Sider)`
          box-shadow: inset -6px 0 15px 0 rgba(15, 16, 16, 0.17);
          background-color: #2c405a;

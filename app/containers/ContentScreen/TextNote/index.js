@@ -16,14 +16,26 @@ import injectReducer from "utils/injectReducer";
 import makeSelectTextNote from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-import { Row, Col, Icon, notification, Popover, List, Mention, Menu } from "antd";
-import {NavLink} from "react-router-dom";
+import {
+  Row,
+  Col,
+  Icon,
+  notification,
+  Popover,
+  List,
+  Mention,
+  Menu
+} from "antd";
+import { NavLink } from "react-router-dom";
 import LayoutDefault from "../../../components/Layouts/layoutDefault";
 import Input from "./../../../components/Elements/Input/";
-import { Button, ButtonText } from "./../../../components/Elements/Button/";
+import {
+  Button,
+  ButtonText,
+  IconButton
+} from "./../../../components/Elements/Button/";
 import Comments from "./../Comments/";
 import { TextNoteStyle } from "./_style";
-
 
 const { toContentState } = Mention;
 
@@ -148,13 +160,13 @@ export class TextNote extends React.Component {
     });
   };
   render() {
-    const {menu} = this.state;
-    return <div>
+    const { menu } = this.state;
+    return <div style={{ height: "100%" }}>
         <Helmet>
           <title>TextNote</title>
           <meta name="description" content="Description of TextNote" />
         </Helmet>
-        <LayoutDefault menu={menu} comments={<Comments/>}>
+        <LayoutDefault menu={menu} comments={<Comments />}>
           <TextNoteStyle>
             <Row type="flex" justify="center" align="middle" style={{ height: "100%" }}>
               <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl={{ span: 9 }} xxl={{ span: 7 }}>
@@ -183,9 +195,7 @@ export class TextNote extends React.Component {
                         </div>} bordered dataSource={this.state.listItems} renderItem={item => <List.Item
                         >
                           {this.state.listItems}
-                        </List.Item>} />} title={this.state.text} trigger="click" visible={this.state.visible} onVisibleChange={this.handleVisibleChange}>
-                  {/* <Button type="primary">Click me</Button> */}
-                </Popover>
+                        </List.Item>} />} title={this.state.text} trigger="click" visible={this.state.visible} onVisibleChange={this.handleVisibleChange} />
                 <Mention className="animated zoomIn slow-2s delay-0s" ref={ele => (this.mention = ele)} multiLines={true} loading={true} style={{ width: "100%", height: 150 }} onChange={this.handleChange} placeholder="input @ to mention people, # to mention tag" prefix={["@", "#"]} onSearchChange={this.onSearchChange} suggestions={this.state.suggestions} onSelect={onSelect} value={this.state.inputValue2} />
                 <Button type="primary" className="animated zoomIn slow-2s delay-0s" onClick={this.onFromSend}>
                   Submit
@@ -193,6 +203,13 @@ export class TextNote extends React.Component {
                 <ButtonText type="primary" icon="thunderbolt" isright="right" className="animated zoomIn slow-2s delay-0s" onClick={this.randomTextGenerate}>
                   Get random text
                 </ButtonText>
+              </Col>
+              <Col>
+                <Row className="animated zoomIn slow-2s delay-0s" type="flex" justify="start" align="top">
+                  <Col>
+                    <IconButton icon="tag" onClick={() => alert("no tags found")} style={{ marginLeft: "20px", marginTop: "20px" }} />
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </TextNoteStyle>

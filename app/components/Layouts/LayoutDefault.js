@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 
 import CrossImg from "../../images/Icons/cross@3x.png";
 import LogoPic from "../../images/Icons/pino@3x.png";
+import Avatar from "../../images/Profiles/yulia.png";
 
 const { Content } = Layout;
 
@@ -22,7 +23,8 @@ export default class LayoutDefault extends Component {
       visible: this.props.collapseAble ? true : false,
       showCommentbox: false,
       menu: this.props.menu,
-      
+      email: this.props.email || "yulia@gmail.com",
+      avatar: this.props.avatar || { Avatar }
     };
     this.showSider = this.showSider.bind(this);
   }
@@ -43,13 +45,17 @@ export default class LayoutDefault extends Component {
   };
   render() {
     const { menu } = this.state;
-    return <div>
+    return (
         <LayoutDefaultStyle>
           <SiderStyle isshowsider={this.state.visible.toString()}>
             <h4 className="_headings"> GENERAL</h4>
             <ul>
               <li>
-                <NavLink to="/content" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="/content"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>Dashboard</span>
                 </NavLink>
               </li>
@@ -58,22 +64,38 @@ export default class LayoutDefault extends Component {
             <h4 className="_headings"> Boxes</h4>
             <ul>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>search</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>sources</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>transfer</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>compare</span>
                 </NavLink>
               </li>
@@ -82,17 +104,29 @@ export default class LayoutDefault extends Component {
             <h4 className="_headings"> Places</h4>
             <ul>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>Search</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>chains</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>map</span>
                 </NavLink>
               </li>
@@ -101,17 +135,29 @@ export default class LayoutDefault extends Component {
             <h4 className="_headings"> tags</h4>
             <ul>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>tree</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>connected </span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="error" className="navigation-item" activeClassName="navigation-item--active">
+                <NavLink
+                  to="error"
+                  className="navigation-item"
+                  activeClassName="navigation-item--active"
+                >
                   <span>Influence map</span>
                 </NavLink>
               </li>
@@ -121,29 +167,52 @@ export default class LayoutDefault extends Component {
             <HeaderTheme>
               <Row type="flex" justify="space-between" align="middle">
                 <Col span={2}>
-                  {this.props.sidebarToggle ? <Icon type="menu-fold" onClick={this.showSider} className="_barsIcon" /> : <div className="_brand">
+                  {this.props.sidebarToggle ? (
+                    <Icon
+                      type="menu-fold"
+                      onClick={this.showSider}
+                      className="_barsIcon"
+                    />
+                  ) : (
+                    <div className="_brand">
                       <img src={LogoPic} alt="logo" />
-                    </div>}
+                    </div>
+                  )}
                 </Col>
                 <Col span={22}>
-                  <NavbarUserModule menu={menu} notifications={this.isNotifications} nobell={this.props.nobell} />
+                  <NavbarUserModule
+                    menu={menu}
+                    notifications={this.isNotifications}
+                    nobell={this.props.nobell}
+                    email={this.state.email}
+                    avatar={this.state.avatar}
+                  />
                 </Col>
               </Row>
             </HeaderTheme>
             <Layout>
-              <Content style={{ margin: "30px", height: "calc(100vh - 124px)" }}>
+              <Content
+                style={{ margin: "30px"}}
+              >
                 {this.props.children}
               </Content>
-              <CommentSiderStyle iscommentbox={this.state.showCommentbox.toString()}>
+              <CommentSiderStyle
+                iscommentbox={this.state.showCommentbox.toString()}
+              >
                 <h3 className="_title">
                   Comments
-                  <img onClick={this.closeCommentbox} src={CrossImg} height="30px" className="_crossBtn" />
+                  <img
+                    onClick={this.closeCommentbox}
+                    src={CrossImg}
+                    height="30px"
+                    className="_crossBtn"
+                  />
                 </h3>
                 {this.props.comments}
               </CommentSiderStyle>
             </Layout>
           </Layout>
         </LayoutDefaultStyle>
-      </div>;
+    );
   }
 }

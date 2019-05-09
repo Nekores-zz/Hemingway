@@ -16,7 +16,7 @@ import injectReducer from "utils/injectReducer";
 import makeSelectContentScreen from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
-
+import { sampleAction } from './actions';
 import { Layout, Row, Col, Form, Menu } from "antd";
 import { NavLink } from "react-router-dom";
 import { LayoutStyle } from "./_style";
@@ -34,38 +34,21 @@ export class ContentScreen extends React.Component {
     super(props);
     this.state = {
       value: "",
-      menu: (
-        <Menu>
-          <Menu.Item>
-            <NavLink
-              to="/content"
-              className="navigation-item"
-              activeClassName="navigation-item--active"
-            >
-              <span>Dashboard</span>
-            </NavLink>
-          </Menu.Item>
-          <Menu.Item>
-            <NavLink
-              to="/login"
-              className="navigation-item"
-              activeClassName="navigation-item--active"
-            >
-              <span>Logout</span>
-            </NavLink>
-          </Menu.Item>
-        </Menu>
-      ),
+      
     };
     this.Golink = this.Golink.bind(this);
   }
   Golink() {
     this.props.history.push("/content/textnote");
+    // this.props.sampleAction({
+    //   name: 'sajid',
+    //   _id: 'fasdfjasdks'
+    // });
   }
   render() {
     const { menu } = this.state;
     return (
-      <div>
+      <div style={{"height": "100%"}}>
         <Helmet>
           <title>Content Screen</title>
           <meta name="description" content="Description of ContentScreen" />
@@ -118,11 +101,13 @@ ContentScreen.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   contentScreen: makeSelectContentScreen()
+
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    dispatch,
+    sampleAction: payload => dispatch(sampleAction(payload)),
   };
 }
 

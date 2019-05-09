@@ -62,51 +62,21 @@ export class ProofReaderScreen extends React.Component {
   }
   render() {
     const {menu} = this.state;
-    return (
-      <div>
+    return <div style={{ height: "100%" }}>
         <Helmet>
           <title>Proof Reader Screen</title>
           <meta name="description" content="Description of ProofReaderScreen" />
         </Helmet>
-        <LayoutDefault menu={menu} comments={<Comments/>}>
+        <LayoutDefault menu={menu} comments={<Comments />}>
           <LayoutStyle>
-            <Row
-              type="flex"
-              justify="center"
-              align="middle"
-              style={{ height: "100%" }}
-              className="animated zoomIn slow-2s delay-0s"
-            >
-              <Col
-                xs={{ span: 24 }}
-                sm={{ span: 18 }}
-                md={{ span: 14 }}
-                lg={{ span: 8 }}
-                xl={{ span: 9 }}
-                xxl={{ span: 7 }}
-              >
-                <Jumborton
-                  stylePic={{
-                    height: "80px",
-                    width: "80px",
-                    borderRadius: "28px",
-                    border: "solid 1px rgba(0, 0, 0, 0.05)",
-                    background: `url(${imgProfile})`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat"
-                  }}
-                  alt="Profile Image"
-                  mainTitle="Hey Mia! Let's edit some texts today!"
-                  primaryButtonName="Let's Go"
-                  primarybuttonClick={this.Golink}
-                  secondaryButtonName="Texts remaining 15/15"
-                />
+            <Row type="flex" justify="center" align="middle" style={{ height: "100%" }} className="animated zoomIn slow-2s delay-0s">
+              <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl={{ span: 9 }} xxl={{ span: 7 }}>
+                <Jumborton stylePic={{ height: "80px", width: "80px", borderRadius: "28px", border: "solid 1px rgba(0, 0, 0, 0.05)", background: `url(${imgProfile})`, backgroundSize: "cover", backgroundRepeat: "no-repeat" }} alt="Profile Image" mainTitle="Hey Mia! Let's edit some texts today!" primaryButtonName="Let's Go" primarybuttonClick={this.Golink} secondaryButtonName="Texts remaining 15/15" />
               </Col>
             </Row>
           </LayoutStyle>
         </LayoutDefault>
-      </div>
-    );
+      </div>;
   }
 }
 

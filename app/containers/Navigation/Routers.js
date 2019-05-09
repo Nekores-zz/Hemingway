@@ -7,8 +7,6 @@ import {
 } from "react-router-dom";
 
 import routes from './paths';
-console.log(routes);
-
 class Routers extends React.PureComponent {
     render() {
         return (

@@ -65,18 +65,16 @@ export class SuccessScreen extends React.Component {
          }
          render() {
            const {menu} = this.state;
-           return <div>
+           return <div style={{ height: "100%" }}>
                <Helmet>
                  <title>Success Screen</title>
                  <meta name="description" content="Description of Success Screen" />
                </Helmet>
-               <LayoutDefault menu={menu} comments={<Comments/>}>
+               <LayoutDefault menu={menu} comments={<Comments />}>
                  <LayoutStyle>
                    <Row type="flex" justify="center" align="middle" style={{ height: "100%" }} className="animated zoomIn slow-2s delay-0s">
                      <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 14 }} lg={{ span: 8 }} xl={{ span: 9 }} xxl={{ span: 7 }}>
-                       <Jumborton stylePic={{ height: "80px", width: "80px", border: "none", background: `url(${imgProfile})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", marginBottom: "-30px" }} alt="Profile Image" mainTitle="Success!" primaryButtonName="Next" para="Your text has been sent for review successfully." primarybuttonClick={this.GolinkPrimaryBtn}
-                       secondarybuttonClick={this.GolinkSecondaryBtn}
-                       secondaryButtonName="Undo" />
+                       <Jumborton stylePic={{ height: "80px", width: "80px", border: "none", background: `url(${imgProfile})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", marginBottom: "-30px" }} alt="Profile Image" mainTitle="Success!" primaryButtonName="Next" para="Your text has been sent for review successfully." primarybuttonClick={this.GolinkPrimaryBtn} secondarybuttonClick={this.GolinkSecondaryBtn} secondaryButtonName="Undo" />
                      </Col>
                    </Row>
                  </LayoutStyle>

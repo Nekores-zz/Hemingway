@@ -126,111 +126,51 @@ export class TextNote extends React.Component {
   };
   render() {
     const {menu} = this.state;
-    return (
-      <div>
+    return <div style={{ height: "100%" }}>
         <Helmet>
           <title>TextNote</title>
           <meta name="description" content="Description of TextNote" />
         </Helmet>
-        <LayoutDefault menu={menu} comments={<Comments/>}>
+        <LayoutDefault menu={menu} comments={<Comments />}>
           <TextNoteStyle>
-            <Row
-              type="flex"
-              justify="center"
-              align="middle"
-              style={{ height: "100%" }}
-            >
-             <Col
-             className="animated zoomIn slow-2s delay-0s"
-                xs={{ span: 24 }}
-                sm={{ span: 9 }}
-                md={{ span: 10}}
-                lg={{ span: 8 }}
-                xl={{ span: 9 }}
-                xxl={{ span: 7 }}
-              >
-              <div>
+            <Row type="flex" justify="center" align="middle" style={{ height: "100%" }}>
+              <Col className="animated zoomIn slow-2s delay-0s" xs={{ span: 24 }} sm={{ span: 9 }} md={{ span: 10 }} lg={{ span: 8 }} xl={{ span: 9 }} xxl={{ span: 7 }}>
+                <div>
                   <p className="_textnote">
-                    Hey! Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of dips, good salads, and incredible cheesecakes. They treat every dish like it is a multi-layered experience, they take all the senses into account.
-                    </p>
+                    Hey! Anastasia is a great vegan cafe to meet friends.
+                    They have a delicious and nutritious breakfast with
+                    loads of dips, good salads, and incredible cheesecakes.
+                    They treat every dish like it is a multi-layered
+                    experience, they take all the senses into account.
+                  </p>
                 </div>
               </Col>
-              <Col
-              xs={{ span: 24 }}
-                sm={{ span: 12 }}
-                md={{ span: 12 }}
-                lg={{ span: 10 }}
-                xl={{ span: 11 }}
-                xxl={{ span: 9 }}>
-              <Row>
-                <Col
-                xs={{ span: 24 }}
-                sm={{ span: 20 }}
-                md={{ span: 20}}
-                lg={{ span: 20 }}
-                xl={{ span: 20 }}
-                xxl={{ span: 20 }}
-              >
-                <Popover
-                  placement="bottom"
-                  content={
-                    <List
-                      header={<div>Header</div>}
-                      footer={<div>Footer</div>}
-                      bordered
-                      dataSource={this.state.listItems}
-                      renderItem={item => (
-                        <List.Item>{this.state.listItems}</List.Item>
-                      )}
-                    />
-                  }
-                  title={this.state.text}
-                  trigger="click"
-                  visible={this.state.visible}
-                  onVisibleChange={this.handleVisibleChange}
-                >
-                  {/* <Button type="primary">Click me</Button> */}
-                </Popover>
-                <Mention
-                  className="animated zoomIn slow-2s delay-0s"
-                  ref={ele => (this.mention = ele)}
-                  multiLines={true}
-                  loading={true}
-                  style={{ width: "100%"}}
-                  onChange={this.handleChange}
-                  placeholder="input @ to mention people, # to mention tag"
-                  prefix={["@", "#"]}
-                  onSearchChange={this.onSearchChange}
-                  suggestions={this.state.suggestions}
-                  onSelect={onSelect}
-                  value={this.state.inputValue2}
-                />
-              </Col>
-                <Col
-                xs={{ span: 24 }}
-                sm={{ span: 4 }}
-                md={{ span: 4 }}
-                lg={{ span: 4 }}
-                xl={{ span: 4 }}
-                xxl={{ span: 4 }}
-              >
-              <Button
-                  type="primary"
-                  className="animated zoomIn slow-2s delay-0s"
-                  onClick={this.onFromSend}
-                  style={{"margin-left": "20px"}}
-                >
-                Submit
-                </Button>
-                
-              </Col>
+              <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 10 }} xl={{ span: 11 }} xxl={{ span: 9 }}>
+                <Row>
+                  <Col xs={{ span: 24 }} sm={{ span: 20 }} md={{ span: 20 }} lg={{ span: 20 }} xl={{ span: 20 }} xxl={{ span: 20 }}>
+                    <Popover placement="bottom" content={<List header={<div>
+                              Header
+                            </div>} footer={<div>
+                              Footer
+                            </div>} bordered dataSource={this.state.listItems} renderItem={item => <List.Item
+                            >
+                              {this.state.listItems}
+                            </List.Item>} />} title={this.state.text} trigger="click" visible={this.state.visible} onVisibleChange={this.handleVisibleChange}>
+                      {/* <Button type="primary">Click me</Button> */}
+                    </Popover>
+                    <Mention className="animated zoomIn slow-2s delay-0s" ref={ele => (this.mention = ele)} multiLines={true} loading={true} style={{ width: "100%" }} onChange={this.handleChange} placeholder="input @ to mention people, # to mention tag" prefix={["@", "#"]} onSearchChange={this.onSearchChange} suggestions={this.state.suggestions} onSelect={onSelect} value={this.state.inputValue2} />
+                  </Col>
+                  <Col xs={{ span: 24 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 4 }} xl={{ span: 4 }} xxl={{ span: 4 }}>
+                    <Button type="primary" className="animated zoomIn slow-2s delay-0s" onClick={this.onFromSend} style={{ "margin-left": "20px" }}>
+                      Submit
+                    </Button>
+                  </Col>
                 </Row>
               </Col>
             </Row>
           </TextNoteStyle>
         </LayoutDefault>
-      </div>
-    );
+      </div>;
   }
 }
 

@@ -2,6 +2,22 @@ import styled from "styled-components";
 import AntModal from "antd/lib/modal";
 
 export const ModalStyle = styled(AntModal)`
+         textarea {
+           border-radius: 4px;
+           border: solid 1px #c5d9e8;
+           :focus {
+             box-shadow: none;
+             border: solid 1px #1785fb;
+           }
+           :hover {
+             border: solid 1px #1785fb;
+           }
+         }
+         .ant-modal-content {
+           padding-left: 20px;
+           padding-right: 20px;
+           padding-bottom: 20px;
+         }
          ._modalContent {
            img {
              height: 48px;
@@ -21,6 +37,9 @@ export const ModalStyle = styled(AntModal)`
              letter-spacing: normal;
              color: #8dabc4;
            }
+         }
+         .ant-modal-footer {
+           border-top: none;
          }
          .ant-modal-footer div button:nth-child(1) {
            display: none;

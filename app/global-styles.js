@@ -31,11 +31,25 @@ const GlobalStyle = createGlobalStyle`
 
   #app {
     width: 100%;
+    height: 100%;
+    // div{
+    //   height:100%
+    //   div{
+    //     height:100%;
+    //     div{
+    //       height:100%;
+    //       section{
+    //         height:100%;
+    //       }
+    //     }
+    //   }
+    }
   } 
 
   h1,h2,h3,h4,h5,h6,span,i,p,input,textarea{
      font-family: SofiaPro !important;
   }
+ 
 `;
 
 export default GlobalStyle;

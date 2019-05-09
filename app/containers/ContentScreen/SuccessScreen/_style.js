@@ -8,4 +8,7 @@ export const LayoutStyle = styled(Layout)`
          background-color: white;
          background-size: cover;
          height: 100%;
+         @media(max-width: 1000px){
+             height:fit-content !important;
+         }
          `;

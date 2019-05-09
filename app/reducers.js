@@ -8,6 +8,7 @@ import { connectRouter } from 'connected-react-router/immutable';
 import history from 'utils/history';
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import contentReducer from './containers/ContentScreen/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers

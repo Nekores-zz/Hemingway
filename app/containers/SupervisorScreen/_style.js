@@ -7,4 +7,10 @@ export const LayoutStyle = styled(Layout)`
          background-color: white;
          background-size: cover;
          height: 100%;
+         ._editBtn {
+           margin: 0;
+         }
+         ._sbmtBtn {
+           margin-right: 20px;
+         }
          `;

@@ -6,6 +6,9 @@ export const TextNoteStyle = styled.div`
     border-top: 2px solid #d8e5ee;
     background-color: white;
     height: 100%;
+    @media(max-width: 1000px){
+             height:fit-content !important;
+         }
     textarea{
         padding-top: 10px;
     }

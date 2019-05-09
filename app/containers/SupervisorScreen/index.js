@@ -28,6 +28,7 @@ import Comment from "../../components/Comment/";
 import Avatar1 from "../../images/Profiles/yulia.png";
 import Avatar2 from "../../images/Profiles/alex.png";
 import Avatar3 from "../../images/Profiles/mia.png";
+import Avatar4 from "../../images/Profiles/nekores.png";
 
 /* eslint-disable react/prefer-stateless-function */
 
@@ -43,34 +44,42 @@ export class SupervisorScreen extends React.Component {
     this.state = {
       visible: false,
       confirmLoading: false,
-      data: {
-       user1: {
+      writeComment: false,
+      data: [
+        {
           id: 1,
           avatar: Avatar1,
           name: "Yulia",
-          noteText: "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account.",
+          noteText:
+            "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account."
         },
-       user2: {
+        {
           id: 2,
           avatar: Avatar2,
           name: "Alex",
-          noteText: "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account.",
+          noteText:
+            "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account."
         },
-       user3: {
+        {
           id: 3,
           avatar: Avatar3,
           name: "Mia",
-          noteText: "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account.",
+          noteText:
+            "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account."
         },
-       user4: {
+        {
           id: 4,
-          avatar: Avatar3,
+          avatar: Avatar4,
           name: "Supervisor",
-          noteText: "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account.",
+          noteText:
+            "Anastasia is a great vegan cafe to meet friends. They have a delicious and nutritious breakfast with loads of tasty dips, good salads, and incredible cakes. They treat every dish like it is a multi-layered experience, they take all the senses into account."
         }
-
-        },
-      
+      ],
+      modal: {
+        avatar: "",
+        author: "",
+        value:""
+      },
       menu: (
         <Menu>
           <Menu.Item>
@@ -97,26 +106,26 @@ export class SupervisorScreen extends React.Component {
 
     this.goOnSubmit = this.goOnSubmit.bind(this);
     this.goOnDelete = this.goOnDelete.bind(this);
-    // this.showModal = this.showModal.bind(this);
-    // this.handleOk = this.handleOk.bind(this);
-    // this.handleCancel = this.handleCancel.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
-  showModal = () => {
-    this.setState({
-      visible: true
-    });
+  showModal = item => {
+    let modal = { ...this.state.modal };
+    modal.avatar = item.avatar;
+    modal.author = item.name;
+    this.setState({ modal, visible: true });
+    console.log(this.state.modal);
+  };
+  writeComment = () => {
+    this.setState({ writeComment: !this.state.writeComment });
   };
 
   handleOk = () => {
     this.setState({
-      ModalText: "The modal will be closed after two seconds",
+      commentTo: "The modal will be closed after two seconds",
       confirmLoading: true
     });
     setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false
-      });
+      this.setState({ visible: false, confirmLoading: false });
       notification["success"]({
         message: "Success",
         description: ["You have added your comment successfully!"]
@@ -125,14 +134,9 @@ export class SupervisorScreen extends React.Component {
   };
 
   handleCancel = () => {
-    console.log("Clicked cancel button");
-    this.setState({
-      visible: false
-    });
+    this.setState({ visible: false });
   };
   goOnSubmit() {
-    //  this.props.history.push("/supervisor/");
-    // alert("Submitted")
     notification["success"]({
       message: "Submited Successfully!",
       description: ["Text note has been approved futher."]
@@ -144,16 +148,25 @@ export class SupervisorScreen extends React.Component {
   commented = () => {
     alert(1);
   };
-
+  onChange(e){
+    let {modal} = this.state;
+    modal.value = e.target.value;
+    this.setState({modal})
+  }
   render() {
-    const { visible, confirmLoading, ModalText, data } = this.state;
+    const { visible, confirmLoading, data, modal } = this.state;
     return (
-      <div>
+      <div style={{ height: "100%" }}>
         <Helmet>
           <title>Supervisor</title>
-          <meta name="description" content="Description of SupervisorScreen" />
+          <meta name="description" content="Description of Supervisor Screen" />
         </Helmet>
-        <LayoutDefault collapseAble={true} menu={this.state.menu} nobell sidebarToggle>
+        <LayoutDefault
+          collapseAble={true}
+          menu={this.state.menu}
+          nobell
+          sidebarToggle
+        >
           <LayoutStyle>
             <Row className="animated zoomIn slow-2s delay-0s">
               <Col
@@ -164,37 +177,61 @@ export class SupervisorScreen extends React.Component {
                 xl={{ span: 23 }}
                 xxl={{ span: 23 }}
               >
-                <Comment
-                  Avatar={data.user1.avatar}
-                  noteText={data.user1.noteText}
-                  background="white"
-                  textnoteCounter="2/15"
-                  authorName={data.user1.name}
-                  commentBtn={this.commented}
-                />
-               {/* // {Object.keys(data).map((keyName, i) => ( 
-                    // <li className="travelcompany-input" key={i}>
-                        <span className="input-label">key: {i} {keyName}</span>
-                    // </li>
-                    ))}
-                    */}
-                  <Comment
-                  Avatar={data.user2.avatar}
-                  noteText={data.user2.noteText}
-                  authorName={data.user2.name}
-                  commentBtn={this.commented}
-                  />
-                
-                
-                <Comment
-                  Avatar={data.user3.avatar}
-                  noteText={data.user3.noteText}
-                  authorName={data.user3.name}
-                  commentBtn={this.commented}
-                />
+                {this.state.data.map((item, i) => {
+                  if (item.name == "Yulia") {
+                    return (
+                      <Comment
+                        key={i}
+                        textNote
+                        Avatar={item.avatar}
+                        noteText={item.noteText}
+                        background="white"
+                        textnoteCounter="2/15"
+                        authorName={item.name}
+                        commentBtn={() => this.showModal(item)}
+                      />
+                    );
+                  } else if (item.name == "Alex") {
+                    return (
+                      <Comment
+                        key={i}
+                        Avatar={item.avatar}
+                        noteText={item.noteText}
+                        authorName={item.name}
+                        commentBtn={() => this.showModal(item)}
+                      />
+                    );
+                  } else if (item.name == "Mia") {
+                    return (
+                      <Comment
+                        key={i}
+                        Avatar={item.avatar}
+                        noteText={item.noteText}
+                        authorName={item.name}
+                        commentBtn={() => this.showModal(item)}
+                      />
+                    );
+                  } else if (item.name == "Supervisor") {
+                    return (
+                      this.state.writeComment && (
+                        <Comment
+                          key={i}
+                          className="animated zoomIn slow-2s delay-0s"
+                          background="#e4f5ff"
+                          Avatar={item.avatar}
+                          noteText={item.noteText}
+                          authorName={item.name}
+                          commentBtn={() => this.showModal(item)}
+                          rightLeft
+
+                        />
+                      )
+                    );
+                  }
+                })}
               </Col>
             </Row>
-            <Row className="animated zoomIn slow-2s delay-0s">
+            <Row>
               <Col
                 xs={{ span: 2 }}
                 sm={{ span: 2 }}
@@ -211,22 +248,32 @@ export class SupervisorScreen extends React.Component {
                 xl={{ span: 19 }}
                 xxl={{ span: 19 }}
               >
-                <Button
-                  type="primary"
-                  onClick={this.goOnSubmit}
-                  className="_btnMain"
-                >
-                  Submit
-                </Button>
+                {this.state.writeComment == true && (
+                  <Button
+                    type="primary"
+                    onClick={this.goOnSubmit}
+                    className="_sbmtBtn animated zoomIn slow-2s delay-0s"
+                  >
+                    Submit
+                  </Button>
+                )}
 
-                <IconButton icon="edit" onClick={this.showModal} />
+                <IconButton
+                  className="_editBtn animated zoomIn slow-2s delay-0s"
+                  icon={this.state.writeComment == true ? "close" : "edit"}
+                  onClick={this.writeComment}
+                />
                 <Modal
-                  avatar={Avatar1}
+                  avatar={modal.avatar}
                   visible={visible}
+                  okText="Save"
                   onOk={this.handleOk}
                   confirmLoading={confirmLoading}
                   onCancel={this.handleCancel}
-                  modalText="Write your comment to Alex"
+                  commentTo={modal.author}
+                  value={this.state.modal.value}
+                  onMouseUp={this.props.onMouseUp}
+                  onChange={this.onChange}
                 />
                 <IconButton
                   icon="delete"

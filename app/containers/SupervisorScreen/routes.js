@@ -1,5 +1,5 @@
 import SupervisorScreen from "./Loadable";
-import SupervisorScreenDelete from "./DeletedNoteScreen";
+import SupervisorScreenDelete from "./DeletedNoteScreen/Loadable";
 
 export default [
   {

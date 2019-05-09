@@ -9,6 +9,7 @@ import AntInput from "antd/lib/input";
 import styled from 'styled-components';
 
 const Input = styled(AntInput)`
+
 `;
 
 export default Input;

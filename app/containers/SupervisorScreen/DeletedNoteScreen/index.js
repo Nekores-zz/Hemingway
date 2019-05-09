@@ -66,7 +66,7 @@ export class DeletedNoteScreen extends React.Component {
   render() {
     const {menu} = this.state;
     return (
-      <div>
+      <div style={{"height": "100%"}}>
         <Helmet>
           <title>Delete Note</title>
           <meta name="description" content="Description of Delete Note" />
