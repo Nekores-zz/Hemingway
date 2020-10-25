@@ -17,6 +17,7 @@ import injectReducer from "utils/injectReducer";
 import reducer from "./reducer";
 import styled from "styled-components";
 import saga from "./saga";
+import { Alert } from "antd";
 
 import LoginFormLogo from "./../../images/Icons/ava-default.png";
 
@@ -39,23 +40,23 @@ export class LoginScreen extends React.Component {
     this.state = {
       databaseDetails: {
         Username: "admin",
-        Password: "admin"
+        Password: "admin",
       },
       validation: true,
       validatePassword: null,
       validateUsername: null,
-      loading: false
+      loading: false,
     };
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (
       this.state.validatePassword == "" ||
       this.state.validateUsername == ""
     ) {
       this.setState({
-        validation: false
+        validation: false,
       });
     }
     // else if (
@@ -110,6 +111,37 @@ export class LoginScreen extends React.Component {
                   : "animated headShake slow-0s delay-0s"
               }
             >
+              <Alert
+                message={
+                  <>
+                    <h3> Credentials</h3>
+                    <ul>
+                      <li>
+                        <h5> Role: Content Creater</h5>
+                        <h6> Username: content</h6>
+                        <h6> Password: content</h6>
+                      </li>
+                      <li>
+                        <h5> Role: Content Editor</h5>
+                        <h6> Username: editor</h6>
+                        <h6> Password: editor</h6>
+                      </li>
+                      <li>
+                        <h5> Role: Content Proofreader</h5>
+                        <h6> Username: proofreader</h6>
+                        <h6> Password: proofreader</h6>
+                      </li>
+                      <li>
+                        <h5> Role: Content Supervisor</h5>
+                        <h6> Username: supervisor</h6>
+                        <h6> Password: supervisor</h6>
+                      </li>
+                    </ul>
+                  </>
+                }
+                closeText="Hide"
+              />
+              <br />
               <LoginFormStyle>
                 <img className="_LoginFormLogo" src={LoginFormLogo} alt="" />
                 <h2 className="_Title_H2"> Welcome to Project!</h2>
@@ -117,9 +149,9 @@ export class LoginScreen extends React.Component {
                   <Form.Item className="usernameInput">
                     <Input
                       placeholder="Username"
-                      onChange={e =>
+                      onChange={(e) =>
                         this.setState({
-                          validateUsername: e.target.value
+                          validateUsername: e.target.value,
                         })
                       }
                     />
@@ -128,7 +160,7 @@ export class LoginScreen extends React.Component {
                     <Input
                       type="password"
                       placeholder="Password"
-                      onChange={e =>
+                      onChange={(e) =>
                         this.setState({ validatePassword: e.target.value })
                       }
                     />
@@ -174,7 +206,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    dispatch,
   };
 }
 
